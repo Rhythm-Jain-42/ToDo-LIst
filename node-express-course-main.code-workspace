@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../task_manager"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "task_manager"
+	}
+}
