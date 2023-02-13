@@ -8,22 +8,21 @@ const showTasks = async () => {
   loadingDOM.style.visibility = 'visible'
   try {
     const {
-      data: { tasks },
-    } = await axios.get('/api/v1/tasks')
-    if (tasks.length < 1) {
+      data: { Tasks },
+    } = await axios.get('http://localhost:3000/api/v1/tasks')
+    if (Tasks.length < 1) {
+
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>'
       loadingDOM.style.visibility = 'hidden'
       return
     }
-    const allTasks = tasks
-      .map((task) => {
-        const { completed, _id: taskID, name } = task
+    console.log(Tasks)
+    const renderedTasks =  Tasks.map((Task) => {
+      console.log(Task)
+        const { completed, _id: taskID, name } = Task
         return `<div class="single-task ${completed && 'task-completed'}">
 <h5><span><i class="far fa-check-circle"></i></span>${name}</h5>
 <div class="task-links">
-
-
-
 <!-- edit link -->
 <a href="task.html?id=${taskID}"  class="edit-link">
 <i class="fas fa-edit"></i>
@@ -36,9 +35,10 @@ const showTasks = async () => {
 </div>`
       })
       .join('')
-    tasksDOM.innerHTML = allTasks
+    tasksDOM.innerHTML = renderedTasks;
   } catch (error) {
-    tasksDOM.innerHTML =
+    console.log(error)
+    tasksDOM.innerHTML = 
       '<h5 class="empty-list">There was an error, please try later....</h5>'
   }
   loadingDOM.style.visibility = 'hidden'
